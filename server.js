@@ -1,7 +1,14 @@
 const express = require('express');
 const app = express();
+
 // Configuração para lidar com JSON
 app.use(express.json());
+
+// GET - index
+app.get('/', (req, res) => {
+    res.send('<p>API Desenvolvimento Web</p>');
+});
+
 app.get('/autor', (req, res) => {
     if (req.get('Accept') === 'application/json') {
         res.json({ autor: "Nome do Autor" });
@@ -9,6 +16,7 @@ app.get('/autor', (req, res) => {
         res.send('<h1>Nome do Autor</h1>');
     }
 });
+
 // Inicia o servidor
 app.listen(3000, () => {
     console.log('Servidor rodando na porta 3000');
