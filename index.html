@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>JM Padaria - Home</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>JM PADARIA</h1>
+        <p>Sabor em cada mordida</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="paes.html">Pães</a>
+        <a href="doces.html">Doces</a>
+        <a href="salgados.html">Salgados</a>
+    </nav>
+
+    <main>
+        <section class="card-container">
+            <a href="paes.html" style="text-decoration: none; color: inherit;">
+                <article class="card">
+                    <div class="img-placeholder"></div>
+                    <h3>Pães</h3>
+                </article>
+            </a>
+            <a href="doces.html" style="text-decoration: none; color: inherit;">
+                <article class="card">
+                    <div class="img-placeholder"></div>
+                    <h3>Doces</h3>
+                </article>
+            </a>
+            <a href="salgados.html" style="text-decoration: none; color: inherit;">
+                <article class="card">
+                    <div class="img-placeholder"></div>
+                    <h3>Salgados</h3>
+                </article>
+            </a>
+        </section>
+
+        <h2>Onde Estamos</h2>
+        <section class="contato-section">
+            <div class="mapa-placeholder">MAPA</div>
+            <div class="endereco">
+                <p>Rua Fulano de Tal, 123<br>
+                Santo Antônio, Tianguá - CE</p>
+                <p><strong>88 9 7070-7070</strong></p>
+            </div>
+        </section>
+
+        <!-- Requisito de Formulário Nativo -->
+        <section>
+            <h2>Peça Online</h2>
+            <form action="#">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+                
+                <label for="pedido">Seu Pedido:</label>
+                <textarea id="pedido" name="pedido" rows="4"></textarea>
+                
+                <button type="submit">Enviar Pedido</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
