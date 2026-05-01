@@ -2,17 +2,17 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>JM Padaria - Home</title>
+    <title>Padaria JM- Home</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <header>
-        <h1>JM PADARIA</h1>
+        <h1>PADARIA JM</h1>
         <p>Sabor em cada mordida</p>
     </header>
 
     <nav>
-        <a href="index.html">Home</a>
+        <a href="index.html">Inicio</a>
         <a href="paes.html">Pães</a>
         <a href="doces.html">Doces</a>
         <a href="salgados.html">Salgados</a>
@@ -22,19 +22,25 @@
         <section class="card-container">
             <a href="paes.html" style="text-decoration: none; color: inherit;">
                 <article class="card">
-                    <div class="img-placeholder"></div>
+                    <div>
+                        <img src="imagens/PÃO CARIOCA.jpeg" class="img-card">
+                    </div>
                     <h3>Pães</h3>
                 </article>
             </a>
             <a href="doces.html" style="text-decoration: none; color: inherit;">
                 <article class="card">
-                    <div class="img-placeholder"></div>
+                    <div>
+                        <img src="imagens/BOLOS.jpeg" class="img-card">
+                    </div>
                     <h3>Doces</h3>
                 </article>
             </a>
             <a href="salgados.html" style="text-decoration: none; color: inherit;">
                 <article class="card">
-                    <div class="img-placeholder"></div>
+                    <div>
+                        <img src="imagens/COXINHA.jpeg" class="img-card">
+                    </div>
                     <h3>Salgados</h3>
                 </article>
             </a>
@@ -42,26 +48,14 @@
 
         <h2>Onde Estamos</h2>
         <section class="contato-section">
-            <div class="mapa-placeholder">MAPA</div>
+            <div class="mapa">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d995.3458047141771!2d-41.0023995!3d-3.7263425!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7eb4936c3cf4215%3A0xf69f5e2355e06377!2sP%C3%A1tio%20dos%20Festejos%20de%20Santo%20Ant%C3%B4nio!5e0!3m2!1spt-BR!2sbr!4v1777660935256!5m2!1spt-BR!2sbr"  loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="mapa"></iframe>
+            </div>
             <div class="endereco">
                 <p>Rua Fulano de Tal, 123<br>
                 Santo Antônio, Tianguá - CE</p>
                 <p><strong>88 9 7070-7070</strong></p>
             </div>
-        </section>
-
-        <!-- Requisito de Formulário Nativo -->
-        <section>
-            <h2>Peça Online</h2>
-            <form action="#">
-                <label for="nome">Nome:</label>
-                <input type="text" id="nome" name="nome" required>
-                
-                <label for="pedido">Seu Pedido:</label>
-                <textarea id="pedido" name="pedido" rows="4"></textarea>
-                
-                <button type="submit">Enviar Pedido</button>
-            </form>
         </section>
     </main>
 </body>
