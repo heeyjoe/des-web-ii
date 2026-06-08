@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarefa 6</title>
+</head>
+<body>
+  <form id="meuFormulario">
+    <label>Nome:</label>
+    <input type="text" id="nome" /><br><br>
+    <label>E-mail:</label>
+    <input type="text" id="email" /><br><br>
+    <label>Telefone:</label>
+    <input type="text" id="fone" /><br><br>
+    <button type="submit">Enviar</button>
+  </form>
+  <div id="mensagem"></div>  
+</body>
+</html>
+<script>
+  document.getElementById('meuFormulario').addEventListener('submit', function (e) {
+    e.preventDefault(); // Evita que o formulário recarregue a página
+    const nome = document.getElementById('nome').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const fone = document.getElementById('fone').value.trim();
+    const msg = document.getElementById('mensagem');
+    // Limpa mensagens anteriores
+    msg.textContent = '';
+    msg.style.color = 'red';
+    // Validações
+    if (!nome || !email || !fone) {
+      msg.textContent = 'Por favor, preencha todos os campos.';
+      return;
+    }
+    if (nome.length < 5 || nome.length > 40) {
+      msg.textContent = 'O nome deve ter entre 5 e 40 caracteres.';
+      return;
+    }
+    if (!email.includes('@')) {
+      msg.textContent = 'E-mail inválido. Deve conter "@"';
+      return;
+    }
+    if (fone.length !== 11) {
+      msg.textContent = 'O telefone deve conter 11 dígitos (com DDD).';
+      return;
+    }
+    // Se passou por todas as validações:
+    msg.style.color = 'green';
+    msg.textContent = 'Formulário enviado com sucesso!';
+  });
+</script>
