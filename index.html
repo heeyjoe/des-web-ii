@@ -1,0 +1,35 @@
+<!DOCTYPE html> 
+<html lang="pt-BR"> 
+<head> 
+  <meta charset="UTF-8"> 
+  <title>Cadastro AJAX</title> 
+  <style> 
+    .mensagem { font-weight: bold; margin-top: 10px; } 
+    .erro { color: red; } 
+    .sucesso { color: green; } 
+    table { margin-top: 20px; width: 100%; border-collapse: collapse; } 
+    th, td { border: 1px solid #ccc; padding: 8px; } 
+  </style> 
+</head> 
+<body> 
+  <h2>Cadastro</h2> 
+  <form id="formCadastro"> 
+    <input type="text" id="nome" placeholder="Nome" required /> 
+    <input type="email" id="email" placeholder="Email" required /> 
+    <button type="submit">Cadastrar</button> 
+  </form>
+   <div id="mensagem" class="mensagem"></div> 
+  <table> 
+    <thead> 
+      <tr> 
+        <th>Nome</th> 
+        <th>Email</th> 
+        <th>Ações</th> 
+      </tr> 
+    </thead> 
+    <tbody id="tabelaCorpo"></tbody> 
+  </table> 
+  <script src="script.js"></script> 
+ 
+</body> 
+</html>
