@@ -1,0 +1,163 @@
+<!DOCTYPE html> 
+<html lang="pt-BR"> 
+<head> 
+  <meta charset="UTF-8" /> 
+  <title>Pedidos - J&M Padaria</title> 
+  <style> 
+    body { 
+      font-family: Arial, sans-serif; 
+      margin: 20px; 
+    } 
+    form { 
+      margin-bottom: 20px; 
+    } 
+    input, button { 
+      padding: 8px; 
+      margin: 5px; 
+    } 
+    table { 
+      border-collapse: collapse; 
+      width: 100%; 
+    } 
+    th, td { 
+      border: 1px solid #ccc; 
+      padding: 8px; 
+    } 
+    th { 
+      background-color: #eee; 
+    } 
+    .success { 
+      color: green; 
+    } 
+    .error { 
+      color: red; 
+    } 
+  </style> 
+</head> 
+<body> 
+  <h1>Pedidos - J&M Padaria</h1> 
+  <form id="formPedido"> 
+    <input type="number" id="id_cliente" placeholder="ID do Cliente" required /> 
+    <input type="text" id="item" placeholder="Item do Pedido" required /> 
+    <input type="number" id="quantidade" placeholder="Quantidade" required /> 
+    <input type="date" id="data_pedido" required /> 
+    <button type="submit">Salvar Pedido</button> 
+  </form> 
+  <div id="mensagem"></div> 
+  <h2> Lista de Pedidos</h2> 
+  <table> 
+    <thead> 
+      <tr> 
+        <th>ID</th> 
+        <th>Cliente</th> 
+        <th>Item</th> 
+        <th>Qtd</th> 
+        <th>Data</th> 
+        <th>Ações</th> 
+      </tr> 
+    </thead> 
+    <tbody id="tabelaPedidos"></tbody> 
+  </table> 
+  <script> 
+    const form = document.getElementById("formPedido"); 
+    const tabela = document.getElementById("tabelaPedidos"); 
+    const msg = document.getElementById("mensagem"); 
+    function mostrarMensagem(texto, sucesso = true) { 
+      msg.textContent = texto; 
+      msg.className = sucesso ? "success" : "error"; 
+      setTimeout(() => msg.textContent = "", 3000); 
+    } 
+    form.addEventListener("submit", (e) => { 
+      e.preventDefault(); 
+      const pedido = { 
+        id_cliente: document.getElementById("id_cliente").value, 
+        item: document.getElementById("item").value, 
+        quantidade: document.getElementById("quantidade").value, 
+        data_pedido: document.getElementById("data_pedido").value 
+      }; 
+      fetch("/api/pedidos", { 
+        method: "POST", 
+        headers: { "Content-Type": "application/json" }, 
+        body: JSON.stringify(pedido) 
+      }) 
+      .then(res => res.json()) 
+      .then(() => { 
+        mostrarMensagem(" Pedido cadastrado com sucesso!"); 
+        form.reset(); 
+        carregarPedidos(); 
+      }) 
+      .catch(() => mostrarMensagem("Erro ao cadastrar pedido", false)); 
+    }); 
+    function carregarPedidos() { 
+      fetch("/api/pedidos") 
+        .then(res => res.json()) 
+        .then(dados => { 
+          tabela.innerHTML = ""; 
+          dados.forEach(p => { 
+             tabela.innerHTML += ` 
+              <tr> 
+                <td>${p.id_pedido}</td> 
+                <td>${p.id_cliente}</td> 
+                <td>${p.item}</td> 
+                <td>${p.quantidade}</td> 
+                <td>${p.data_pedido}</td> 
+                <td> 
+                  <button onclick="editarPedido(${p.id_pedido})">EditarPedido</button> 
+                  <button onclick="apagarPedido(${p.id_pedido})">ApagarPedido</button> 
+                </td> 
+              </tr> 
+            `; 
+          }); 
+        }); 
+    } 
+    function editarPedido(id) { 
+      fetch(`/api/pedidos/${id}`) 
+        .then(res => res.json()) 
+        .then(pedido => { 
+          document.getElementById("id_cliente").value = pedido.id_cliente; 
+          document.getElementById("item").value = pedido.item; 
+          document.getElementById("quantidade").value = pedido.quantidade; 
+          document.getElementById("data_pedido").value = pedido.data_pedido; 
+          // Atualizar ao invés de criar novo 
+          form.removeEventListener("submit", salvarNovo); 
+          form.addEventListener("submit", function atualizar(e) { 
+            e.preventDefault(); 
+            const atualizado = { 
+              id_cliente: pedido.id_cliente, 
+              item: document.getElementById("item").value, 
+              quantidade: document.getElementById("quantidade").value, 
+              data_pedido: document.getElementById("data_pedido").value 
+            }; 
+            fetch(`/api/pedidos/${id}`, { 
+              method: "PUT", 
+              headers: { "Content-Type": "application/json" }, 
+              body: JSON.stringify(atualizado) 
+            }) 
+            .then(res => res.json()) 
+            .then(() => { 
+              mostrarMensagem(" Pedido atualizado!"); 
+              form.reset(); 
+              carregarPedidos(); 
+              form.removeEventListener("submit", atualizar); 
+              form.addEventListener("submit", salvarNovo); 
+            }); 
+          }); 
+          }); 
+    } 
+    function apagarPedido(id) { 
+      if (confirm("Tem certeza que deseja apagar este pedido?")) { 
+        fetch(`/api/pedidos/${id}`, { method: "DELETE" }) 
+          .then(res => res.json()) 
+          .then(() => { 
+            mostrarMensagem("Pedido apagado."); 
+            carregarPedidos(); 
+          }); 
+      } 
+    } 
+    function salvarNovo(e) { 
+      e.preventDefault(); // padrão de criação 
+    } 
+    carregarPedidos(); 
+  </script> 
+</body> 
+</html>
